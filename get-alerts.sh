@@ -44,7 +44,7 @@ epoch=$(date +"%s000")
 path='/alert/alerts'
 requestVars="${verb}${epoch}${path}"
 hmac=$(echo -n "${requestVars}" | openssl sha256 -hmac "${key}" | sed -e 's/.* //')
-b64=$(echo -n ${hmac} | base64)
+b64=$(echo -n ${hmac} | base64 | tr -d '\n')
 auth="LMV1 ${id}:${b64}:${epoch}"
 
 url="https://five9.logicmonitor.com/santaba/rest${path}?filter=_all~${filter}"
