@@ -43,7 +43,7 @@ verb='GET'
 epoch=$(date +"%s000")
 path='/alert/alerts'
 requestVars="${verb}${epoch}${path}"
-hmac=$(echo -n "${requestVars}" | openssl sha256 -hmac "${key}")
+hmac=$(echo -n "${requestVars}" | openssl sha256 -hmac "${key}" | sed -e 's/.* //')
 b64=$(echo -n ${hmac} | base64)
 auth="LMV1 ${id}:${b64}:${epoch}"
 
