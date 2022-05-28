@@ -56,6 +56,6 @@ curl -s \
   -H "Content-Type: application/json" \
   -H "Authorization: ${auth}" \
   "${url}" \
-  | jq -c '.data.lines[] | { legend: .legend, data: (.data|max) }'
+  | jq -c '.data.lines[] | { legend: .legend, data: (.data| add/length) }' # Return average value.
 
 #signature=base64(HMAC-SHA256(Access Key,HTTP VERB + TIMESTAMP (in epoch milliseconds) + POST/PUT DATA (if any) + RESOURCE PATH) )
